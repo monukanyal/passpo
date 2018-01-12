@@ -8,7 +8,8 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft";
 
-var port = process.env.PORT || 80;
+//var port = process.env.PORT || 8080;
+var port =8080;
 var http=require('http').Server(app);
 var io=require('socket.io')(http);
        http.listen(port);
@@ -144,9 +145,6 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
                   });
 
             });
-        
-           
-
          res.render('dashboard',{message:req.flash('success')});
     });
   /*---------routes end--------*/
