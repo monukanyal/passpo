@@ -105,7 +105,7 @@ app.use(cookieParser());
 // );
 
 app.use(
-  session({  secret: 'shhhhhhhhh', store: new MongoStore({ url: 'mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft' })
+  session({  secret: 'shhhhhhhhh', resave: true,  saveUninitialized: true, store: new MongoStore({ url: 'mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft' })
   })
 );
 app.use(passport.initialize());
@@ -117,7 +117,7 @@ app.use(flash());
 
   io.on('connection', function(socket){
         
-        console.log('socket started');
+        //console.log('socket started');
           
         socket.on('req_fetchinfo', function(username,room){
         
