@@ -11,8 +11,8 @@ var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft";
 
 
 
-//var port = process.env.PORT || 8080;
-var port =8080;
+var port = process.env.PORT || 8080;
+//var port =8080;
 var http=require('http').Server(app);
 var io=require('socket.io')(http);
        http.listen(port);
