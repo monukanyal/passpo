@@ -4,11 +4,11 @@
   "description": "simple passport app with node js",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/monukanyal/passpo.git"
+    "url": "https://github.com/monukanyal/passpo.git"
   },
   "keywords": [
     "node",
