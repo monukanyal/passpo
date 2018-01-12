@@ -2,7 +2,7 @@ const express = require('express');
 var app = express();
 const path = require('path');
 const md5=require('md5');
-var morgan = require('morgan'); //http request logger
+//var morgan = require('morgan'); //http request logger
 
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
@@ -102,7 +102,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 //app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+//app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 
   io.on('connection', function(socket){
