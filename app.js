@@ -8,7 +8,7 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft";
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 80;
 var http=require('http').Server(app);
 var io=require('socket.io')(http);
        http.listen(port);
