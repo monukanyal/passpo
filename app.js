@@ -2,11 +2,14 @@ const express = require('express');
 var app = express();
 const path = require('path');
 const md5=require('md5');
+
 //var morgan = require('morgan'); //http request logger
 
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft";
+
+
 
 //var port = process.env.PORT || 8080;
 var port =8080;
@@ -27,6 +30,7 @@ const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const dotenv = require('dotenv');
 
 var passport = require('passport')
@@ -91,11 +95,17 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// app.use(
+//   session({
+//     secret: 'shhhhhhhhh',
+//     resave: true,
+//     saveUninitialized: true
+//   })
+// );
+
 app.use(
-  session({
-    secret: 'shhhhhhhhh',
-    resave: true,
-    saveUninitialized: true
+  session({  secret: 'shhhhhhhhh', store: new MongoStore({ url: 'mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft' })
   })
 );
 app.use(passport.initialize());
