@@ -115,7 +115,7 @@ app.use(flash());
 //app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 
-  io.on('connection', function(socket){
+  /*io.on('connection', function(socket){
         
         //console.log('socket started');
           
@@ -128,7 +128,7 @@ app.use(flash());
                io.to('').emit('get_fetchinfo',value,color);
         });
 
-      });
+      });*/
 /*------routes------*/
     app.get('/', function (req, res) {
      // console.log('flash'+req.flash('error'));
@@ -144,7 +144,7 @@ app.use(flash());
         
                  // console.log('socket started');
                     
-                  socket.on('req_fetchinfo', function(username,room){
+                  socket.on('req_fetchinfo', function(){
                   
                      
                         socket.join(req.session.passport.user[0].fname);
