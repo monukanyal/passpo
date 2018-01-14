@@ -2,17 +2,13 @@ const express = require('express');
 var app = express();
 const path = require('path');
 const md5=require('md5');
-
 //var morgan = require('morgan'); //http request logger
 
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft";
 
-
-
 var port = process.env.PORT || 8080;
-//var port =8080;
 var http=require('http').Server(app);
 var io=require('socket.io')(http);
        http.listen(port);
@@ -43,8 +39,8 @@ const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn('/');
 passport.use(new LocalStrategy(
 
   function(username, password, done) {
-    console.log(username);
-    console.log(password);
+    //console.log(username);
+    //console.log(password);
       //username='emma@gmail.com';
       //var pwd='emma@123';
      // password=md5(pwd);
@@ -96,14 +92,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// app.use(
-//   session({
-//     secret: 'shhhhhhhhh',
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
-
 app.use(
   session({  secret: 'shhhhhhhhh', resave: true,  saveUninitialized: true, store: new MongoStore({ url: 'mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft' })
   })
@@ -115,20 +103,22 @@ app.use(flash());
 //app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 
-  /*io.on('connection', function(socket){
+  io.on('connection', function(socket){
         
-        //console.log('socket started');
-          
-        socket.on('req_fetchinfo', function(username,room){
-        
-            //socket.join('room1');
-            
-               var value=gen();
-                var color=randomColor();
-               io.to('').emit('get_fetchinfo',value,color);
-        });
+                  console.log('socket started');
+                    
+                  socket.on('req_fetchinfo', function(room){
+                  
+                     
+                        socket.join(room);
+                        var value=gen();
+                         //var color=randomColor();
+                        io.to(room).emit('get_fetchinfo',value);
+                        
+                  });
 
-      });*/
+            });
+   
 /*------routes------*/
     app.get('/', function (req, res) {
      // console.log('flash'+req.flash('error'));
@@ -140,22 +130,8 @@ app.use(flash());
          // console.log('flash'+req.flash('success')); 
          //---flash will show after login 
         //console.log(JSON.stringify(req.session.passport.user[0].fname));
-               io.on('connection', function(socket){
-        
-                 // console.log('socket started');
-                    
-                  socket.on('req_fetchinfo', function(){
-                  
-                     
-                        socket.join(req.session.passport.user[0].fname);
-                        var value=gen();
-                         var color=randomColor();
-                        io.to(req.session.passport.user[0].fname).emit('get_fetchinfo',value,color);
-                        
-                  });
-
-            });
-         res.render('dashboard',{message:req.flash('success')});
+            
+         res.render('dashboard',{message:req.flash('success'),name:req.session.passport.user[0].fname});
     });
   /*---------routes end--------*/
 
