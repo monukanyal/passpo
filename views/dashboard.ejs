@@ -18,12 +18,15 @@
   <div class="row">
     <div class="col-sm-4">
      <h2><%- message %> User</h2>
+
     </div>
     <div class="col-sm-4">
+    	<input type="hidden" id="username" value="<%- name %>">
      <div id="circle"></div>
     </div>
     <div class="col-sm-4">
      
+
     </div>
   </div>
 </div>
@@ -41,12 +44,13 @@
 
 	 		var socket = io.connect(pageURL);
 	  		setInterval(function(){ 
-			    socket.emit('req_fetchinfo');
+	  			var room=$('#username').val();
+			    socket.emit('req_fetchinfo',room);
 			}, 3000);
 
-	   		 socket.on('get_fetchinfo',function(value,color){
+	   		 socket.on('get_fetchinfo',function(value){
 	   		 	//console.log(color);
-			    morr.setData( [{ label: "probe", value: value,labelColor: color } ]);
+			    morr.setData( [{ label: "probe", value: value } ]);
 			
 			});
 
