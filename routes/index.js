@@ -1,10 +1,17 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-
-
-
 /* GET home page. */
+
+router.get('/', function (req, res) {
+
+      //console.log('flash'+req.flash('error'));
+      res.render('login',{message:req.flash('error')});
+});
+
+router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Login failed',successFlash: 'Welcome!'  }));
+ 
+/*
 router.get('/', function(req, res, next) {
   res.render('index');
 });
@@ -43,5 +50,7 @@ router.get('/failure', function(req, res) {
     error_description: error_description[0],
   });
 });
+
+*/
 
 module.exports = router;
